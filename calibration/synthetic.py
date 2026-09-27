@@ -2,6 +2,7 @@ import numpy as np
 from calibration.config import CalibrationConfig, DatasetPaths
 import cv2
 import os
+from .config import SyntheticConfig
 
 #W = 1600
 #H = 1200
