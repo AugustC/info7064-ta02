@@ -1,0 +1,13 @@
+[project]
+name = "ta02-calibration"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "jupyter>=1.1.1",
+    "jupyterlab>=4.6.4",
+    "matplotlib>=3.10.9",
+    "opencv-python>=5.0.0.93",
+    "pillow-heif>=1.8.0",
+]
