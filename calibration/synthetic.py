@@ -2,16 +2,6 @@ import numpy as np
 from calibration.config import CalibrationConfig, DatasetPaths
 import cv2
 import os
-from dataclasses import dataclass
-
-@dataclass
-class SyntheticConfig:
-    width : int
-    height : int
-    K : np.ndarray
-    distortion : np.ndarray
-    stereo_distance : float
-    pixels_per_square : int
 
 #W = 1600
 #H = 1200

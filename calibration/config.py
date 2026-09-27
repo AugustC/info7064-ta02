@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Optional
 from pathlib import Path
 import os
+import numpy as np
 
 @dataclass
 class CalibrationConfig:
@@ -20,6 +20,26 @@ class CalibrationConfig:
             self.root_dir = Path("/content/drive/MyDrive/CI1026-Visão Computacional/TA02 - Calibração de Imagem/calibracao")
         else:
             self.root_dir = Path(__file__).parent / "data"
+
+
+@dataclass(frozen=True)
+class Experiment3DConfig:
+    """Geometry used to validate 3D points projected into the image."""
+
+    cube_origin_squares: tuple[float, float] = (3.0, 1.0)
+    cube_side_squares: float = 3.0
+    axis_length_squares: float = 3.0
+    cube_depth_direction: float = -1.0
+
+
+@dataclass
+class SyntheticConfig:
+    width : int
+    height : int
+    K : np.ndarray
+    distortion : np.ndarray
+    stereo_distance : float
+    pixels_per_square : int
 
 
 @dataclass
