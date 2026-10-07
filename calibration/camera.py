@@ -19,6 +19,8 @@ class CalibrationResults:
     image_size: tuple[int, int]
     fov_x: float
     fov_y: float
+    std_int: float
+    std_ext: float
 
 
 def create_object_points(corners, square_size_mm):
@@ -99,7 +101,7 @@ def calibrate_camera(obj_pts, img_pts, image_size):
     #     obj_pts, img_pts, TAM, None, None, criteria=CRIT)
     # dist = dist.ravel()
     # std_int = std_int.ravel()
-    rms, camera_matrix, distortion, rotation_vectors, translation_vectors, *_ = cv2.calibrateCameraExtended(
+    rms, camera_matrix, distortion, rotation_vectors, translation_vectors, std_int, std_ext, *_ = cv2.calibrateCameraExtended(
         obj_pts,
         img_pts,
         image_size,
@@ -127,6 +129,8 @@ def calibrate_camera(obj_pts, img_pts, image_size):
         image_size=image_size,
         fov_x=fov_x,
         fov_y=fov_y,
+        std_int=std_int,
+        std_ext=std_ext
     )
 
 

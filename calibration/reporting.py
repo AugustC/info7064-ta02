@@ -66,7 +66,6 @@ def compare_with_ground_truth(
 
 def save_calibration_results(
     result: CalibrationResults,
-    std_int,
     resultados,
     metrics_directory,
 ):
@@ -113,23 +112,24 @@ def save_calibration_results(
 
     lines = []
     for name, value, standard_deviation in [
-        ("f_x", result.camera_matrix[0, 0], std_int[0]),
-        ("f_y", result.camera_matrix[1, 1], std_int[1]),
-        ("c_x", result.camera_matrix[0, 2], std_int[2]),
-        ("c_y", result.camera_matrix[1, 2], std_int[3]),
+        ("f_x", result.camera_matrix[0, 0], result.std_int[0]),
+        ("f_y", result.camera_matrix[1, 1], result.std_int[1]),
+        ("c_x", result.camera_matrix[0, 2], result.std_int[2]),
+        ("c_y", result.camera_matrix[1, 2], result.std_int[3]),
     ]:
+        print(standard_deviation)
         lines.append(
             f"${name}$ (px) & {format_decimal(value)} & "
-            f"{format_decimal(standard_deviation)} \\\\"
+            f"{format_decimal(standard_deviation[0])} \\\\"
         )
     for name, value, standard_deviation in zip(
         ["k_1", "k_2", "p_1", "p_2", "k_3"],
         result.distortion,
-        std_int[4:9],
+        result.std_int[4:9],
     ):
         lines.append(
             f"${name}$ & {format_decimal(value, 4)} & "
-            f"{format_decimal(standard_deviation, 4)} \\\\"
+            f"{format_decimal(standard_deviation[0], 4)} \\\\"
         )
     lines.append(
         f"RMS (px) & \\multicolumn{{2}}{{c}}{{"
